@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JavaScript y React · Paso a paso</title>
+<meta name="description" content="Documentación paso a paso del curso gratuito de JavaScript (ECMAScript 6) y React: instalación de herramientas, fundamentos de ES6 y primer componente en React.">
+<meta name="author" content="María Celeste Guevara">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f7d046'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='700' font-size='26' text-anchor='middle' fill='%23161616'%3EJS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f1115; --bg2:#151821; --panel:#1a1e29; --line:#2a3040; --text:#eceef3; --muted:#9ba3b4;
+  --js:#f7d046; --react:#5ed3f3; --ok:#6fdc8c; --warn:#ffb35c; --bad:#ff7a7a;
+  --code-bg:#0b0d12; --t-key:#c792ea; --t-str:#c3e88d; --t-num:#f78c6c; --t-com:#697098; --t-tag:#5ed3f3; --t-fn:#82aaff;
+  --radius:14px; --shadow:0 12px 32px rgba(0,0,0,.28);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#fbfaf6; --bg2:#f2f0e8; --panel:#ffffff; --line:#e4e1d6; --text:#1b1c20; --muted:#5f6370;
+    --js:#c99a00; --react:#0a8fb5; --ok:#1f9d4c; --warn:#c06a00; --bad:#c83a3a;
+    --shadow:0 12px 32px rgba(40,30,0,.07); color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#fbfaf6; --bg2:#f2f0e8; --panel:#ffffff; --line:#e4e1d6; --text:#1b1c20; --muted:#5f6370;
+  --js:#c99a00; --react:#0a8fb5; --ok:#1f9d4c; --warn:#c06a00; --bad:#c83a3a;
+  --shadow:0 12px 32px rgba(40,30,0,.07); color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Outfit,Inter,sans-serif;line-height:1.2;margin:0}
+a{color:var(--react)}
+code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.88em}
+code,pre,kbd,.arbol,.consola{font-variant-ligatures:none}
+:not(pre)>code{background:var(--bg2);border:1px solid var(--line);padding:.08em .38em;border-radius:6px}
+kbd{font-family:"JetBrains Mono",monospace;font-size:.82em;background:var(--panel);border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;padding:.05em .45em}
+
+/* barra superior */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:12px 20px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:Outfit;font-weight:700;text-decoration:none;color:var(--text)}
+.logo b{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--js);color:#161616;font-size:14px}
+.top .sp{flex:1}
+.prog{font-size:13px;color:var(--muted);white-space:nowrap}
+.btn-ic{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;height:36px;min-width:36px;padding:0 10px;cursor:pointer;font:inherit;font-size:14px}
+.btn-ic:hover{border-color:var(--react)}
+.bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--js),var(--react));width:0;z-index:30;transition:width .1s}
+#menuBtn{display:none}
+
+/* portada */
+.hero{padding:64px 20px 40px;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.25fr .9fr;gap:40px;align-items:center}
+.tag{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--js);margin-bottom:14px}
+.hero h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.02em}
+.hero h1 span{background:linear-gradient(90deg,var(--js),var(--react));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:18px;max-width:58ch}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 14px;font-size:14px}
+.chip strong{color:var(--text)}
+.mapa{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+.mapa h3{font-size:15px;color:var(--muted);font-weight:600;margin-bottom:14px}
+.mapa ol{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.mapa li a{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--text);padding:10px 12px;border-radius:10px;background:var(--bg2);transition:transform .15s}
+.mapa li a:hover{transform:translateX(4px)}
+.mapa .n{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;font-weight:700;font-family:Outfit;color:#161616;flex:none}
+.mapa small{display:block;color:var(--muted);font-size:13px}
+
+/* diseño principal */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:250px 1fr;gap:40px}
+nav.side{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 96px);overflow:auto;padding-right:6px}
+nav.side h4{font-family:Outfit;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:18px 0 6px}
+nav.side a{display:flex;gap:8px;align-items:center;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:14px}
+nav.side a:hover{color:var(--text);background:var(--bg2)}
+nav.side a.on{color:var(--text);background:var(--panel);box-shadow:inset 3px 0 0 var(--js)}
+nav.side a .dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:10px}
+nav.side a.hecho .dot{background:var(--ok);border-color:var(--ok);color:#0f1115}
+main{min-width:0}
+
+.parte{margin:40px 0 18px;padding-top:12px}
+.parte .kicker{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.parte h2{font-size:clamp(26px,3.4vw,34px);margin:4px 0 8px}
+.parte p{color:var(--muted);margin:0}
+
+.paso{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px 26px 20px;margin:18px 0;box-shadow:var(--shadow);opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,border-color .3s}
+.paso.vis{opacity:1;transform:none}
+.paso.hecho{border-color:color-mix(in srgb,var(--ok) 55%,var(--line))}
+.paso-h{display:flex;gap:14px;align-items:flex-start;margin-bottom:10px}
+.num{flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:12px;font:800 18px Outfit;color:#161616}
+.js .num,.n.js{background:var(--js)}
+.react .num,.n.react{background:var(--react)}
+.tool .num,.n.tool{background:#b49cff}
+.paso h3{font-size:22px;margin-top:6px}
+.paso .sub{color:var(--muted);font-size:14px;margin-top:2px}
+.paso ol.pasos{padding-left:0;list-style:none;counter-reset:s;margin:14px 0}
+.paso ol.pasos>li{counter-increment:s;position:relative;padding:4px 0 8px 40px}
+.paso ol.pasos>li::before{content:counter(s);position:absolute;left:0;top:4px;width:26px;height:26px;border-radius:50%;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;font-size:13px;font-weight:600;color:var(--muted)}
+.paso ul{padding-left:20px}
+.paso p{margin:10px 0}
+
+.check{display:flex;align-items:center;gap:10px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);cursor:pointer;user-select:none;font-size:14px;color:var(--muted)}
+.check input{width:20px;height:20px;accent-color:var(--ok);cursor:pointer}
+
+/* código */
+.code{position:relative;margin:14px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--code-bg)}
+.code .cap{display:flex;align-items:center;gap:8px;padding:8px 12px;font:12px "JetBrains Mono",monospace;color:#9aa3b8;background:#141822;border-bottom:1px solid #222838}
+.code .cap .sp{flex:1}
+.code .cap button{border:1px solid #2c3346;background:#1b2030;color:#cfd5e4;border-radius:7px;font:12px Inter;padding:3px 10px;cursor:pointer}
+.code .cap button:hover{border-color:var(--react)}
+.code pre{margin:0;padding:14px 16px;overflow:auto;color:#e6e8ef;font:13.5px/1.6 "JetBrains Mono",monospace}
+.tk-k{color:var(--t-key)}.tk-s{color:var(--t-str)}.tk-n{color:var(--t-num)}.tk-c{color:var(--t-com);font-style:italic}.tk-t{color:var(--t-tag)}.tk-f{color:var(--t-fn)}
+.consola{display:none;border-top:1px solid #222838;background:#07080c;padding:10px 16px;font:13px/1.6 "JetBrains Mono",monospace;color:#d6dae5}
+.consola.ver{display:block;animation:in .3s}
+.consola .l::before{content:"› ";color:#5f6782}
+.consola .err{color:#ff8a8a}
+@keyframes in{from{opacity:0;transform:translateY(-4px)}to{opacity:1}}
+
+/* avisos */
+.nota{border-radius:12px;padding:12px 16px;margin:14px 0;font-size:15px;border:1px solid;background:var(--bg2)}
+.nota b{display:block;font-family:Outfit;margin-bottom:2px}
+.nota.info{border-color:color-mix(in srgb,var(--react) 45%,transparent)}
+.nota.info b{color:var(--react)}
+.nota.hoy{border-color:color-mix(in srgb,var(--warn) 50%,transparent)}
+.nota.hoy b{color:var(--warn)}
+.nota.error{border-color:color-mix(in srgb,var(--bad) 50%,transparent)}
+.nota.error b{color:var(--bad)}
+
+/* tablas y árbol */
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:Outfit;color:var(--muted);font-weight:600}
+.tabla{overflow-x:auto}
+.arbol{font:13.5px/1.7 "JetBrains Mono",monospace;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;white-space:pre;overflow-x:auto}
+.arbol .del{color:var(--bad);text-decoration:line-through}
+.arbol .new{color:var(--ok);font-weight:600}
+
+/* diagrama de flujo React */
+.flujo{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0;align-items:stretch}
+.flujo div{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:14px;position:relative}
+.flujo div code{display:block;font-weight:600;margin-bottom:4px;background:none;border:0;padding:0;color:var(--react)}
+.flujo div:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:50%;transform:translateY(-50%);color:var(--muted);font-weight:700;z-index:1}
+
+/* demo de scope */
+.scope{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.caja{border:2px dashed var(--line);border-radius:12px;padding:14px;position:relative}
+.caja h5{margin:0 0 8px;font:600 13px Outfit;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.caja.global{border-color:color-mix(in srgb,var(--js) 60%,transparent)}
+.caja.local{border-color:color-mix(in srgb,var(--react) 60%,transparent)}
+.valor{font:600 15px "JetBrains Mono",monospace}
+
+/* pie */
+footer{border-top:1px solid var(--line);padding:30px 20px;text-align:center;color:var(--muted);font-size:14px}
+footer strong{color:var(--text)}
+.final{background:linear-gradient(135deg,color-mix(in srgb,var(--js) 16%,var(--panel)),color-mix(in srgb,var(--react) 16%,var(--panel)));border:1px solid var(--line);border-radius:var(--radius);padding:26px;margin-top:30px}
+.final h2{font-size:26px;margin-bottom:8px}
+.final ul{margin:8px 0 0;padding-left:20px}
+
+@media (max-width:920px){
+  .hero{grid-template-columns:1fr;padding-top:40px}
+  .wrap{grid-template-columns:1fr}
+  #menuBtn{display:inline-block}
+  nav.side{position:fixed;top:61px;left:0;bottom:0;width:280px;max-height:none;background:var(--bg);border-right:1px solid var(--line);padding:10px 16px 30px;transform:translateX(-100%);transition:transform .25s;z-index:25}
+  nav.side.abierto{transform:none}
+  .flujo{grid-template-columns:1fr 1fr}
+  .flujo div:nth-child(2)::after{content:none}
+}
+@media (max-width:560px){
+  .top{padding:10px 16px}
+  .logo span{display:none}
+  .hero,.wrap{padding-left:16px;padding-right:16px}
+  .paso{padding:20px 16px 16px}
+  .paso ol.pasos>li{padding-left:34px}
+  .scope,.flujo{grid-template-columns:1fr}
+  .flujo div::after{content:none!important}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.paso{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+
+<header class="top">
+  <button class="btn-ic" id="menuBtn" aria-label="Abrir índice">☰</button>
+  <a class="logo" href="#inicio"><b>JS</b><span>JavaScript y React · Paso a paso</span></a>
+  <div class="sp"></div>
+  <span class="prog" id="prog">0 de 15 pasos</span>
+  <button class="btn-ic" id="tema" aria-label="Cambiar tema">◐</button>
+</header>
+
+<section class="hero" id="inicio">
+  <div>
+    <span class="tag">Documentación del curso</span>
+    <h1>Curso gratuito de <span>JavaScript (ES6) y React</span></h1>
+    <p>Guía paso a paso, escrita a partir de la transcripción de las clases. Explica cómo preparar el entorno, repasa las novedades de ECMAScript 6 y termina con el primer componente funcional de React.</p>
+    <div class="meta">
+      <span class="chip">Instructores: <strong>Mariano Puglisi y Fernando Bursa</strong></span>
+      <span class="chip">Documentado por: <strong>María Celeste Guevara</strong></span>
+      <span class="chip">15 pasos · 3 partes</span>
+    </div>
+  </div>
+  <aside class="mapa">
+    <h3>Ruta del curso</h3>
+    <ol>
+      <li><a href="#parte1"><span class="n tool">1</span><span>Instalar herramientas<small>VS Code, extensiones, Prettier y Node.js</small></span></a></li>
+      <li><a href="#parte2"><span class="n js">2</span><span>Introducción a ECMAScript 6<small>let, const, backticks, funciones flecha y map</small></span></a></li>
+      <li><a href="#parte3"><span class="n react">3</span><span>Primeros pasos con React<small>Crear el proyecto y el primer componente</small></span></a></li>
+    </ol>
+  </aside>
+</section>
+
+<div class="wrap">
+  <nav class="side" id="side" aria-label="Índice">
+    <h4>Parte 1 · Herramientas</h4>
+    <a href="#p1"><span class="dot"></span>Instalar VS Code</a>
+    <a href="#p2"><span class="dot"></span>Atajos de teclado</a>
+    <a href="#p3"><span class="dot"></span>Instalar extensiones</a>
+    <a href="#p4"><span class="dot"></span>Configurar Prettier</a>
+    <a href="#p5"><span class="dot"></span>Instalar Node.js</a>
+    <h4>Parte 2 · ECMAScript 6</h4>
+    <a href="#p6"><span class="dot"></span>Mini proyecto Intro JS</a>
+    <a href="#p7"><span class="dot"></span>Variables let y scope</a>
+    <a href="#p8"><span class="dot"></span>Constantes const</a>
+    <a href="#p9"><span class="dot"></span>Backticks</a>
+    <a href="#p10"><span class="dot"></span>Funciones flecha</a>
+    <a href="#p11"><span class="dot"></span>Recorrer arrays con map</a>
+    <h4>Parte 3 · React</h4>
+    <a href="#p12"><span class="dot"></span>¿Qué es React?</a>
+    <a href="#p13"><span class="dot"></span>Crear el proyecto</a>
+    <a href="#p14"><span class="dot"></span>Cómo funciona la app</a>
+    <a href="#p15"><span class="dot"></span>Primer componente</a>
+    <h4>Cierre</h4>
+    <a href="#resumen"><span class="dot"></span>Resumen</a>
+  </nav>
+
+  <main>
+    <div class="nota info" style="margin-top:0">
+      <b>Cómo usar esta guía</b>
+      Sigue los pasos en orden. Cada bloque de código tiene un botón <em>Copiar</em> y, en los ejemplos de JavaScript, un botón <em>Ver consola</em> que muestra lo que imprime el navegador. Marca cada paso como hecho para llevar tu avance (se guarda en este navegador).
+    </div>
+
+    <!-- ============ PARTE 1 ============ -->
+    <div class="parte" id="parte1">
+      <div class="kicker" style="color:#b49cff">Parte 1</div>
+      <h2>Instalación de herramientas necesarias</h2>
+      <p>Antes de programar se prepara el entorno: un editor de código con extensiones útiles y Node.js para trabajar con React.</p>
+    </div>
+
+    <article class="paso tool" id="p1">
+      <div class="paso-h"><span class="num">1</span><div><h3>Instalar Visual Studio Code</h3><div class="sub">El editor que se usa durante todo el curso</div></div></div>
+      <p>Visual Studio Code (VS Code) es uno de los editores más populares para desarrollo de software. Trae <strong>IntelliSense</strong> (autocompletado según el framework), herramientas de <strong>depuración</strong> y una <strong>terminal integrada</strong> para ejecutar comandos, por ejemplo de Git.</p>
+      <ol class="pasos">
+        <li>Busca <code>vs code</code> en Google y entra a la página oficial: <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">code.visualstudio.com</a>.</li>
+        <li>Haz clic en <strong>Download</strong> y elige el instalador de tu sistema (Windows, macOS o Linux). En el curso se descarga la versión de <strong>Windows de 64 bits</strong>.</li>
+        <li>Abre el archivo descargado para iniciar el instalador y <strong>acepta los términos y condiciones</strong>. Clic en <em>Siguiente</em>.</li>
+        <li>Deja la <strong>ruta de instalación por defecto</strong> y el grupo de programas que sugiere. Clic en <em>Siguiente</em>.</li>
+        <li>En las tareas adicionales marca:
+          <ul>
+            <li><strong>Crear un icono en el escritorio</strong> (<em>Create a desktop icon</em>).</li>
+            <li><strong>Agregar «Abrir con Code»</strong> al menú contextual del Explorador de Windows, para abrir archivos y carpetas del proyecto con clic derecho.</li>
+          </ul>
+        </li>
+        <li>Clic en <em>Siguiente</em> → <em>Instalar</em>. Al terminar, clic en <strong>Finalizar</strong>; si dejaste marcada la opción, el editor se abre solo.</li>
+      </ol>
+      <label class="check"><input type="checkbox" data-paso="p1">Paso completado</label>
+    </article>
+
+    <article class="paso tool" id="p2">
+      <div class="paso-h"><span class="num">2</span><div><h3>Tener a mano los atajos de teclado</h3><div class="sub">Recurso descargable de la clase</div></div></div>
+      <p>La clase incluye un PDF con todos los <em>shortcuts</em> de VS Code. Ahorran tiempo para ejecutar comandos, abrir ventanas o cambiar la disposición del entorno. Estos son los que aparecen a lo largo del curso:</p>
+      <div class="tabla"><table>
+        <tr><th>Atajo (Windows)</th><th>Para qué sirve</th></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>Guardar el archivo (con Prettier configurado, también lo formatea).</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + <kbd>Ñ</kbd> (teclado español) · <kbd>Ctrl</kbd> + <kbd>`</kbd> (teclado inglés)</td><td>Abrir o cerrar la terminal integrada.</td></tr>
+        <tr><td><kbd>Ctrl</kbd> + rueda del ratón</td><td>Agrandar la letra en la consola de Windows (CMD).</td></tr>
+        <tr><td><kbd>F5</kbd> (en el navegador)</td><td>Recargar la página para ver los cambios.</td></tr>
+        <tr><td><kbd>F12</kbd> (en el navegador)</td><td>Abrir las herramientas de desarrollo y la pestaña <em>Console</em>.</td></tr>
+      </table></div>
+      <div class="nota info"><b>Dónde encontrarlos</b>La lista oficial completa está en VS Code, menú <em>Help → Keyboard Shortcuts Reference</em>.</div>
+      <label class="check"><input type="checkbox" data-paso="p2">Paso completado</label>
+    </article>
+
+    <article class="paso tool" id="p3">
+      <div class="paso-h"><span class="num">3</span><div><h3>Instalar las extensiones de VS Code</h3><div class="sub">Prettier, Bracket Pair Colorizer 2 y ES7 React snippets</div></div></div>
+      <ol class="pasos">
+        <li>Abre VS Code y entra a la vista de <strong>Extensiones</strong>: el icono de los cuadrados en la barra lateral izquierda (o <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>).</li>
+        <li>Busca <code>Prettier</code> (con doble T) y elige la primera: <strong>Prettier - Code formatter</strong>. Clic en <em>Install</em>.<br>
+          <small style="color:var(--muted)">Ordena la indentación y la estructura del código para que quede prolijo y con un formato estándar. No es obligatoria: si no te convence, en el engranaje de la extensión eliges <em>Uninstall</em>.</small></li>
+        <li>Busca <code>Bracket Pair Colorizer</code>. Aparecen las versiones 1 y 2; instala la <strong>2</strong>, que es la mejorada.<br>
+          <small style="color:var(--muted)">Colorea cada par de llaves para ver dónde empieza y termina cada función, muy útil en componentes grandes.</small></li>
+        <li>Busca <code>ES7</code> e instala <strong>ES7 React/Redux/React-Native snippets</strong>.<br>
+          <small style="color:var(--muted)">Con una abreviatura escribe un bloque de código completo (componentes, métodos, imports) y acelera el desarrollo.</small></li>
+      </ol>
+      <div class="nota hoy"><b>Nota actual</b>Bracket Pair Colorizer 2 ya está obsoleta: VS Code colorea los pares de llaves por sí solo desde 2021 (ajuste <code>editor.bracketPairColorization.enabled</code>, activado por defecto). Si no aparece en el buscador, no hace falta instalarla. La extensión de snippets hoy se llama <em>ES7+ React/Redux/React-Native snippets</em>.</div>
+      <label class="check"><input type="checkbox" data-paso="p3">Paso completado</label>
+    </article>
+
+    <article class="paso tool" id="p4">
+      <div class="paso-h"><span class="num">4</span><div><h3>Configurar Prettier para que formatee al guardar</h3><div class="sub">Dos ajustes en Settings</div></div></div>
+      <ol class="pasos">
+        <li>En VS Code ve a <strong>File → Preferences → Settings</strong> (o <kbd>Ctrl</kbd> + <kbd>,</kbd>).</li>
+        <li>En el buscador de ajustes escribe <code>format</code>.</li>
+        <li>En <strong>Editor: Default Formatter</strong> elige <strong>Prettier - Code formatter</strong> en la lista desplegable.</li>
+        <li>Marca la casilla <strong>Editor: Format On Save</strong>.</li>
+        <li>Cierra los ajustes. Desde ahora, cada vez que guardes (<kbd>Ctrl</kbd> + <kbd>S</kbd> o <em>File → Save</em>) el archivo se formatea solo: corrige la indentación y completa, por ejemplo, los punto y coma que falten.</li>
+      </ol>
+      <p>Si prefieres editar el archivo de configuración directamente, el resultado equivale a esto en <code>settings.json</code>:</p>
+      <div class="code"><div class="cap">settings.json</div><pre data-lang="js">{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}</pre></div>
+      <label class="check"><input type="checkbox" data-paso="p4">Paso completado</label>
+    </article>
+
+    <article class="paso tool" id="p5">
+      <div class="paso-h"><span class="num">5</span><div><h3>Instalar Node.js</h3><div class="sub">Necesario para crear el proyecto React e instalar sus módulos</div></div></div>
+      <ol class="pasos">
+        <li>Busca <code>Node</code> en el navegador y entra a la página oficial: <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a>.</li>
+        <li>Descarga la versión <strong>LTS</strong> (<em>Long Term Support</em>). Es la versión estable y probada. La otra («Current») trae las últimas características pero se recomienda la LTS.</li>
+        <li>Ejecuta el instalador: <em>Next</em> → acepta los términos → <em>Next</em>.</li>
+        <li>Deja la ruta por defecto y las opciones como están → <em>Next</em> → <strong>Install</strong>.</li>
+        <li>Acepta la ventana de seguridad de Windows (<em>Sí</em>) y, al terminar, clic en <strong>Finish</strong>.</li>
+        <li>Comprueba la instalación en una consola nueva:</li>
+      </ol>
+      <div class="code"><div class="cap">CMD</div><pre data-lang="sh">node -v
+npm -v</pre></div>
+      <div class="nota hoy"><b>Nota actual</b>En el video se ve Node 14.17.4 LTS. Hoy la versión será mayor; lo importante es instalar siempre la que diga <strong>LTS</strong>. Este paso de comprobación no aparece en el video, pero confirma que <code>node</code> y <code>npm</code> quedaron disponibles.</div>
+      <label class="check"><input type="checkbox" data-paso="p5">Paso completado</label>
+    </article>
+
+    <!-- ============ PARTE 2 ============ -->
+    <div class="parte" id="parte2">
+      <div class="kicker" style="color:var(--js)">Parte 2</div>
+      <h2>Introducción a JavaScript ECMAScript 6</h2>
+      <p>Un mini proyecto para repasar las novedades de ES6 que después se usan en React.</p>
+    </div>
+
+    <article class="paso js" id="p6">
+      <div class="paso-h"><span class="num">6</span><div><h3>Crear el mini proyecto «Intro JS» y verlo en el navegador</h3><div class="sub">Consola de Windows, VS Code e IIS</div></div></div>
+      <p><strong>a) Crear la carpeta y los archivos desde la consola.</strong> Abre la lupa de Windows, escribe <code>CMD</code> y presiona <kbd>Enter</kbd>.</p>
+      <div class="code"><div class="cap">CMD</div><pre data-lang="sh">cd \
+mkdir introjs
+cd introjs
+copy con index.html
+copy con script.js
+code .</pre></div>
+      <ol class="pasos">
+        <li><code>cd \</code> lleva a la raíz del disco <code>C:</code> (también puedes usar <code>cd ..</code> varias veces).</li>
+        <li><code>mkdir introjs</code> crea la carpeta del proyecto y <code>cd introjs</code> entra en ella.</li>
+        <li><code>copy con index.html</code> crea un archivo vacío. Para terminarlo presiona <kbd>Ctrl</kbd> + <kbd>Z</kbd> y luego <kbd>Enter</kbd>. Repite con <code>script.js</code>.</li>
+        <li><code>code .</code> abre VS Code en esa carpeta. Si pregunta si confías en los autores, clic en <strong>Yes</strong>.</li>
+      </ol>
+      <div class="nota info"><b>Aclaración</b>En el audio no se oye el atajo para cerrar <code>copy con</code>: es <kbd>Ctrl</kbd> + <kbd>Z</kbd> y <kbd>Enter</kbd>. Otra forma de crear un archivo vacío es <code>type nul &gt; index.html</code>.</div>
+
+      <p><strong>b) Escribir la estructura HTML.</strong> En <code>index.html</code> escribe <code>html</code> y elige el snippet <strong>html:5</strong> (o escribe <code>!</code> y <kbd>Tab</kbd>): VS Code arma la estructura completa. Cambia el título a <em>Intro</em>, agrega un <code>&lt;h1&gt;</code> y enlaza el script:</p>
+      <div class="code"><div class="cap">introjs/index.html</div><pre data-lang="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;title&gt;Intro&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Introducción a ECMAScript 6&lt;/h1&gt;
+    &lt;script type="module" src="./script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre></div>
+      <ul>
+        <li><code>type="module"</code> prepara el archivo para usar <code>import</code> y <code>export</code>, que se ven más adelante.</li>
+        <li><code>./</code> indica que <code>script.js</code> está en la misma carpeta que <code>index.html</code>.</li>
+      </ul>
+
+      <p><strong>c) Publicarlo en IIS para abrirlo con <code>localhost</code>.</strong> Un script con <code>type="module"</code> no funciona abriendo el archivo con doble clic; necesita un servidor web. El curso usa Internet Information Services (IIS), que viene con Windows:</p>
+      <ol class="pasos">
+        <li>En la lupa de Windows busca <strong>«Activar o desactivar las características de Windows»</strong> (en inglés: <em>Turn Windows features on or off</em>).</li>
+        <li>Marca <strong>Internet Information Services</strong> y pulsa <strong>Aceptar</strong>. Espera a que se instale.</li>
+        <li>En la lupa escribe <code>IIS</code> y abre el <strong>Administrador de Internet Information Services</strong>.</li>
+        <li>Despliega el nombre del equipo → <strong>Sitios</strong> → clic derecho en <strong>Default Web Site</strong> → <strong>Agregar directorio virtual</strong>.</li>
+        <li>Alias: <code>introjs</code>. Ruta de acceso física: <code>C:\introjs</code>. Clic en <strong>Aceptar</strong>.</li>
+        <li>En Chrome abre <code>http://localhost/introjs/index.html</code>. El nombre del archivo es opcional porque <code>index.html</code> se abre por defecto.</li>
+        <li>Debe verse el título «Introducción a ECMAScript 6». Abre la consola del navegador con <kbd>F12</kbd>: ahí verás los <code>console.log</code> de los siguientes pasos.</li>
+      </ol>
+      <div class="nota hoy"><b>Alternativa más sencilla</b>Si no quieres instalar IIS, puedes usar la extensión <em>Live Server</em> de VS Code (clic derecho en <code>index.html</code> → <em>Open with Live Server</em>) o ejecutar <code>npx serve</code> dentro de la carpeta. Funcionan igual para este mini proyecto.</div>
+      <label class="check"><input type="checkbox" data-paso="p6">Paso completado</label>
+    </article>
+
+    <article class="paso js" id="p7">
+      <div class="paso-h"><span class="num">7</span><div><h3>Declarar variables con <code>let</code> y entender el scope</h3><div class="sub">Todo el código de la Parte 2 va en <code>script.js</code></div></div></div>
+      <p><code>let</code> declara una variable cuyo valor <strong>puede cambiar</strong> durante la vida de la aplicación. Para los nombres se usa <strong>camelCase</strong>: primera palabra en minúscula y la inicial de las siguientes en mayúscula (<code>peliculaTitulo</code>).</p>
+      <ol class="pasos">
+        <li>Crea la función <code>setTitulo</code> con una variable <code>let</code> dentro y muéstrala en consola. Llama a la función, guarda y recarga con <kbd>F5</kbd>.</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">function setTitulo() {
+  let peliculaTitulo = "Terminator 2";
+  console.log(peliculaTitulo);
+}
+
+setTitulo();</pre><div class="consola" data-out="Terminator 2"></div></div>
+      <ol class="pasos" start="2" style="counter-reset:s 1">
+        <li>Prueba a declarar otra vez la misma variable dentro de la función. El navegador muestra un error porque <strong>una variable <code>let</code> no se puede volver a declarar en el mismo bloque</strong>:</li>
+      </ol>
+      <div class="code"><div class="cap">script.js · prueba que falla</div><pre data-lang="js">function setTitulo() {
+  let peliculaTitulo = "Terminator 2";
+  console.log(peliculaTitulo);
+  let peliculaTitulo = "Avengers"; // ❌ error
+}</pre><div class="consola" data-err="Uncaught SyntaxError: Identifier 'peliculaTitulo' has already been declared"></div></div>
+      <ol class="pasos" start="3" style="counter-reset:s 2">
+        <li>Comenta o borra esa línea. Ahora declara una variable con <strong>el mismo nombre fuera de la función</strong> y muéstrala después de la llamada:</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">let peliculaTitulo = "Avengers"; // scope global
+
+function setTitulo() {
+  let peliculaTitulo = "Terminator 2"; // scope local
+  console.log(peliculaTitulo);
+}
+
+setTitulo();
+console.log(peliculaTitulo);</pre><div class="consola" data-out="Terminator 2|Avengers"></div></div>
+      <p>Se imprimen los dos títulos por el <strong>scope</strong> (alcance) de cada variable:</p>
+      <div class="scope">
+        <div class="caja global"><h5>Global (todo el archivo)</h5><span class="valor">peliculaTitulo = "Avengers"</span><p style="font-size:14px;color:var(--muted);margin:8px 0 0">Se puede usar en cualquier parte del código.</p></div>
+        <div class="caja local"><h5>Local (dentro de setTitulo)</h5><span class="valor">peliculaTitulo = "Terminator 2"</span><p style="font-size:14px;color:var(--muted);margin:8px 0 0">Solo existe dentro de la función y ahí tapa a la global.</p></div>
+      </div>
+      <label class="check"><input type="checkbox" data-paso="p7">Paso completado</label>
+    </article>
+
+    <article class="paso js" id="p8">
+      <div class="paso-h"><span class="num">8</span><div><h3>Declarar constantes con <code>const</code></h3><div class="sub">Valores que no cambian</div></div></div>
+      <ol class="pasos">
+        <li>Crea la función <code>setPrecio</code> con una constante y llámala:</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">function setPrecio() {
+  const peliculaPrecio = 50;
+  console.log(peliculaPrecio);
+}
+
+setPrecio();</pre><div class="consola" data-out="50"></div></div>
+      <ol class="pasos" start="2" style="counter-reset:s 1">
+        <li>Intenta asignarle otro valor dentro de la función (<code>peliculaPrecio = 60;</code>). Aparece un error: <strong>a una constante no se le puede cambiar el valor</strong>.</li>
+      </ol>
+      <div class="code"><div class="cap">script.js · prueba que falla</div><pre data-lang="js">function setPrecio() {
+  const peliculaPrecio = 50;
+  console.log(peliculaPrecio);
+  peliculaPrecio = 60; // ❌ error
+}</pre><div class="consola" data-out="50" data-err="Uncaught TypeError: Assignment to constant variable."></div></div>
+      <ol class="pasos" start="3" style="counter-reset:s 2">
+        <li>Comenta esa línea. Declara una constante global con el mismo nombre y muéstrala al final. El scope funciona igual que con <code>let</code>:</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">const peliculaPrecio = 20; // global
+
+function setPrecio() {
+  const peliculaPrecio = 50; // local
+  console.log(peliculaPrecio);
+  // peliculaPrecio = 60;
+}
+
+setPrecio();
+console.log(peliculaPrecio);</pre><div class="consola" data-out="50|20"></div></div>
+      <div class="nota info"><b>¿Cuándo usar const?</b>Para datos que no cambian mientras la app está en uso, por ejemplo el correo del usuario que inició sesión.</div>
+      <label class="check"><input type="checkbox" data-paso="p8">Paso completado</label>
+    </article>
+
+    <article class="paso js" id="p9">
+      <div class="paso-h"><span class="num">9</span><div><h3>Concatenar texto con backticks</h3><div class="sub">Template literals de ES6</div></div></div>
+      <ol class="pasos">
+        <li>Crea la función <code>mostrarPrecio</code> y concatena con <code>+</code>, la forma clásica:</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">function mostrarPrecio() {
+  let peliculaPrecio = 65;
+  console.log("El precio es: " + peliculaPrecio);
+}
+
+mostrarPrecio();</pre><div class="consola" data-out="El precio es: 65"></div></div>
+      <ol class="pasos" start="2" style="counter-reset:s 1">
+        <li>Ahora escribe lo mismo con <strong>backticks</strong> (<code>`</code>): encierra todo el texto entre backticks y coloca cada variable dentro de <code>${ }</code>. Ya no hace falta un <code>+</code> por cada variable.</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">function mostrarPrecio() {
+  let peliculaPrecio = 65;
+  console.log("El precio es: " + peliculaPrecio);
+  console.log(`El precio es: ${peliculaPrecio}`);
+}
+
+mostrarPrecio();</pre><div class="consola" data-out="El precio es: 65|El precio es: 65"></div></div>
+      <div class="nota info"><b>¿Dónde está el backtick?</b>En el teclado español suele estar junto a la tecla de los corchetes y llaves (se escribe con <kbd>Shift</kbd> y luego espacio). Si no lo encuentras: <kbd>Alt</kbd> + <kbd>9</kbd><kbd>6</kbd> en el teclado numérico.</div>
+      <label class="check"><input type="checkbox" data-paso="p9">Paso completado</label>
+    </article>
+
+    <article class="paso js" id="p10">
+      <div class="paso-h"><span class="num">10</span><div><h3>Escribir funciones flecha (arrow functions)</h3><div class="sub">La forma de función que más se usa en React</div></div></div>
+      <ol class="pasos">
+        <li>Comenta la función anterior con <code>/* ... */</code>.</li>
+        <li>Declara la función como si fuera una constante: <code>const</code>, el nombre, <code>=</code>, los paréntesis de los parámetros y la flecha <code>=&gt;</code>.</li>
+        <li>Llámala como cualquier función y recarga el navegador.</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">/*
+function mostrarPrecio() { ... }
+*/
+
+const mostrarPrecio = () => {
+  let peliculaPrecio = 70;
+  console.log(`El precio es: ${peliculaPrecio}`);
+};
+
+mostrarPrecio();</pre><div class="consola" data-out="El precio es: 70"></div></div>
+      <p>Particularidades de las funciones flecha:</p>
+      <ul>
+        <li>Entre los paréntesis van los <strong>parámetros</strong>. Si hay <strong>uno solo</strong>, se pueden omitir los paréntesis.</li>
+        <li>Si el cuerpo es <strong>una sola instrucción</strong>, se pueden omitir las llaves. Con varias instrucciones, las llaves son obligatorias.</li>
+      </ul>
+      <div class="code"><div class="cap">ejemplo · forma corta</div><pre data-lang="js">const saludar = nombre => console.log(`Hola, ${nombre}`);
+
+saludar("Celeste");</pre><div class="consola" data-out="Hola, Celeste"></div></div>
+      <label class="check"><input type="checkbox" data-paso="p10">Paso completado</label>
+    </article>
+
+    <article class="paso js" id="p11">
+      <div class="paso-h"><span class="num">11</span><div><h3>Recorrer un array con <code>map</code></h3><div class="sub">Mostrar una lista de películas</div></div></div>
+      <p><code>map</code> está disponible en todos los arrays: recorre cada elemento como si fuera un bucle y ejecuta una función por cada uno.</p>
+      <ol class="pasos">
+        <li>Define un array de objetos. Los corchetes <code>[ ]</code> crean el array y cada par de llaves <code>{ }</code> es un objeto con sus propiedades. Los números van sin comillas y los textos entre comillas.</li>
+        <li>Crea la función flecha <code>mostrarTodas</code>, que recibe el array como parámetro.</li>
+        <li>Dentro, llama a <code>peliculas.map()</code> con una función flecha que recibe cada elemento (<code>p</code>) y lo imprime.</li>
+        <li>Llama a <code>mostrarTodas(peliculas)</code>, guarda y recarga.</li>
+      </ol>
+      <div class="code"><div class="cap">script.js</div><pre data-lang="js">let peliculas = [
+  { idPelicula: 1, titulo: "Avatar" },
+  { idPelicula: 2, titulo: "Terminator 2" },
+  { idPelicula: 3, titulo: "Silent Hill" },
+];
+
+const mostrarTodas = (peliculas) => {
+  peliculas.map((p) => console.log(p.idPelicula, p.titulo));
+};
+
+mostrarTodas(peliculas);</pre><div class="consola" data-out="1 'Avatar'|2 'Terminator 2'|3 'Silent Hill'"></div></div>
+      <div class="nota info"><b>Por qué conviene</b>La función flecha dentro de <code>map</code> no necesita nombre ni declararse aparte: recibe el elemento <code>p</code> y lo usa ahí mismo. La estructura se parece a JSON, pero es un objeto de JavaScript.</div>
+      <label class="check"><input type="checkbox" data-paso="p11">Paso completado</label>
+    </article>
+
+    <!-- ============ PARTE 3 ============ -->
+    <div class="parte" id="parte3">
+      <div class="kicker" style="color:var(--react)">Parte 3</div>
+      <h2>Primeros pasos con React</h2>
+      <p>Se crea el proyecto <code>peliculas_spa</code> (una <em>Single Page Application</em>) y su primer componente funcional.</p>
+    </div>
+
+    <article class="paso react" id="p12">
+      <div class="paso-h"><span class="num">12</span><div><h3>Entender qué es React</h3><div class="sub">Contexto antes de programar</div></div></div>
+      <ul>
+        <li>Es una <strong>librería de JavaScript para construir interfaces de usuario</strong> (front end), creada por Facebook.</li>
+        <li>Usa todas las novedades de ECMAScript más herramientas propias que simplifican el trabajo: modificar el DOM a mano con JavaScript es tedioso y React lo resuelve con <strong>componentes</strong>, <strong>hooks</strong> de estado, de contexto y de referencia, y componentes de terceros.</li>
+        <li>La documentación oficial y su tutorial están en <a href="https://react.dev/" target="_blank" rel="noopener">react.dev</a> (antes reactjs.org). Conviene consultarla ante cualquier duda.</li>
+        <li>En el curso se trabaja con <strong>componentes funcionales</strong>.</li>
+      </ul>
+      <label class="check"><input type="checkbox" data-paso="p12">Paso completado</label>
+    </article>
+
+    <article class="paso react" id="p13">
+      <div class="paso-h"><span class="num">13</span><div><h3>Crear el proyecto React</h3><div class="sub">Con <code>npx create-react-app</code></div></div></div>
+      <ol class="pasos">
+        <li>Abre <code>CMD</code> (puedes agrandar la letra con <kbd>Ctrl</kbd> + rueda del ratón).</li>
+        <li>Ve a la raíz del disco, crea la carpeta <code>demoreact</code> y entra en ella.</li>
+        <li>Crea el proyecto con <code>npx create-react-app peliculas_spa</code>. Tarda unos minutos.</li>
+        <li>Entra a la carpeta del proyecto y ábrela en VS Code con <code>code .</code>. Confía en los autores (<strong>Yes</strong>) para evitar problemas de permisos.</li>
+      </ol>
+      <div class="code"><div class="cap">CMD</div><pre data-lang="sh">cd \
+mkdir demoreact
+cd demoreact
+npx create-react-app peliculas_spa
+cd peliculas_spa
+code .</pre></div>
+      <div class="nota info"><b>Aclaración</b>La transcripción dice «Demi React»; por el contexto es una carpeta de demostración (<code>demoreact</code>). El nombre de la carpeta puede ser otro. El nombre del proyecto debe ir en minúsculas.</div>
+      <div class="nota hoy"><b>Nota actual</b>Create React App fue declarado obsoleto por el equipo de React en 2025. Todavía funciona para seguir el curso (puede mostrar un aviso). Si falla, una alternativa equivalente es Vite: <code>npm create vite@latest peliculas_spa -- --template react</code>, luego <code>cd peliculas_spa</code>, <code>npm install</code> y <code>npm run dev</code>. Con Vite el archivo de entrada se llama <code>src/main.jsx</code> en vez de <code>src/index.js</code>.</div>
+      <label class="check"><input type="checkbox" data-paso="p13">Paso completado</label>
+    </article>
+
+    <article class="paso react" id="p14">
+      <div class="paso-h"><span class="num">14</span><div><h3>Ejecutar la app y entender cómo funciona</h3><div class="sub">De <code>index.js</code> al <code>div</code> con id <code>root</code></div></div></div>
+      <ol class="pasos">
+        <li>Abre la terminal de VS Code (<kbd>Ctrl</kbd> + <kbd>Ñ</kbd>) y ejecuta:</li>
+      </ol>
+      <div class="code"><div class="cap">Terminal</div><pre data-lang="sh">npm start</pre></div>
+      <ol class="pasos" start="2" style="counter-reset:s 1">
+        <li>Se abre el navegador en <code>http://localhost:3000</code> con la página de inicio estándar de React.</li>
+        <li>Revisa el recorrido que hace la aplicación para mostrar esa página:</li>
+      </ol>
+      <div class="flujo">
+        <div><code>public/index.html</code>Tiene un <code>&lt;div id="root"&gt;</code> vacío en el body.</div>
+        <div><code>src/index.js</code>Importa los componentes y los «dibuja» dentro de <code>root</code> con <code>render</code>.</div>
+        <div><code>&lt;React.StrictMode&gt;</code>Viene por defecto; activa el modo estricto.</div>
+        <div><code>src/App.js</code>Componente que retorna el HTML: el logo, el texto y el enlace.</div>
+      </div>
+      <ol class="pasos" start="4" style="counter-reset:s 3">
+        <li>Para usar un componente importado se escribe como una etiqueta que se cierra sola: <code>&lt;App /&gt;</code>. Al importar no hace falta poner la extensión <code>.js</code>.</li>
+        <li>Prueba quitar el logo en <code>App.js</code> y guardar: el navegador se actualiza solo, sin <kbd>F5</kbd>. Si alguna vez no lo hace, recarga a mano. Después deja el archivo como estaba.</li>
+      </ol>
+      <div class="nota info"><b>Idea clave</b>Todo lo que escribes en React termina convertido en JavaScript, el lenguaje que entienden todos los navegadores.</div>
+      <label class="check"><input type="checkbox" data-paso="p14">Paso completado</label>
+    </article>
+
+    <article class="paso react" id="p15">
+      <div class="paso-h"><span class="num">15</span><div><h3>Crear el primer componente: <code>Peliculas</code></h3><div class="sub">Limpieza, componente funcional, Fragment y Virtual DOM</div></div></div>
+      <p><strong>a) Limpiar el proyecto.</strong> En <code>src</code> selecciona y borra (tecla <kbd>Supr</kbd>) los archivos que no se usarán, y crea las carpetas del componente:</p>
+      <div class="arbol">src/
+├── <span class="del">App.css</span>
+├── <span class="del">App.js</span>
+├── <span class="del">App.test.js</span>
+├── <span class="del">index.css</span>
+├── <span class="del">logo.svg</span>
+├── <span class="del">reportWebVitals.js</span>
+├── <span class="del">setupTests.js</span>
+├── index.js
+└── <span class="new">components/</span>
+    └── <span class="new">Pelicula/</span>
+        └── <span class="new">Peliculas.jsx</span></div>
+      <ol class="pasos">
+        <li>En <code>index.js</code> borra los <code>import</code> de los archivos eliminados, el componente <code>&lt;App /&gt;</code> y las líneas finales de <code>reportWebVitals</code>. Guarda.</li>
+        <li>Clic derecho en <code>src</code> → <strong>New Folder</strong> → <code>components</code>. Dentro, otra carpeta <code>Pelicula</code>.</li>
+        <li>Dentro de <code>Pelicula</code>: <strong>New File</strong> → <code>Peliculas.jsx</code>. Las extensiones <code>.js</code> y <code>.jsx</code> son válidas; <code>.jsx</code> ayuda a que el editor reconozca el componente.</li>
+      </ol>
+
+      <p><strong>b) Escribir el componente.</strong></p>
+      <div class="code"><div class="cap">src/components/Pelicula/Peliculas.jsx</div><pre data-lang="jsx">import React from "react";
+
+const Peliculas = () => {
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Películas&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Peliculas;</pre></div>
+      <ol class="pasos" start="4" style="counter-reset:s 3">
+        <li><strong>Imports arriba</strong>: todo componente importa React con <code>import React from "react";</code>.</li>
+        <li><strong>Definición</strong>: una función flecha cuyo nombre empieza con <strong>mayúscula</strong>. Así React la reconoce como componente. Es un <em>componente funcional</em>. Los componentes de clase existen, pero el curso no los usa porque requieren más código y React se orienta a los funcionales.</li>
+        <li><strong>return</strong>: devuelve el HTML (JSX) que el componente insertará donde se use.</li>
+        <li><strong>export default</strong>: sin exportarlo, ningún otro archivo puede importarlo y se produce un error.</li>
+      </ol>
+
+      <p><strong>c) Un único elemento padre.</strong> Si agregas un segundo <code>&lt;div&gt;</code> al mismo nivel, aparece un error. Se soluciona envolviendo todo en un <strong>Fragment</strong>, una etiqueta vacía <code>&lt;&gt; &lt;/&gt;</code>:</p>
+      <div class="nota error"><b>Error</b>JSX expressions must have one parent element (la expresión JSX debe tener un único elemento padre).</div>
+      <div class="code"><div class="cap">src/components/Pelicula/Peliculas.jsx</div><pre data-lang="jsx">import React from "react";
+
+const Peliculas = () => {
+  return (
+    &lt;&gt;
+      &lt;div&gt;
+        &lt;h2&gt;Películas&lt;/h2&gt;
+      &lt;/div&gt;
+      &lt;div&gt;Película contenido&lt;/div&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Peliculas;</pre></div>
+
+      <p><strong>d) Mostrar el componente en <code>index.js</code>.</strong> Impórtalo con la ruta relativa (sin extensión) y escríbelo como etiqueta con la <strong>P mayúscula</strong>, igual que se exportó:</p>
+      <div class="code"><div class="cap">src/index.js</div><pre data-lang="jsx">import React from "react";
+import ReactDOM from "react-dom/client";
+import Peliculas from "./components/Pelicula/Peliculas";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  &lt;React.StrictMode&gt;
+    &lt;Peliculas /&gt;
+  &lt;/React.StrictMode&gt;
+);</pre></div>
+      <div class="nota hoy"><b>Diferencia con el video</b>En el video, <code>index.js</code> usa la forma de React 17: <code>import ReactDOM from "react-dom";</code> y <code>ReactDOM.render(&lt;React.StrictMode&gt;&lt;Peliculas /&gt;&lt;/React.StrictMode&gt;, document.getElementById("root"));</code>. Los proyectos creados hoy traen React 18 o 19, que usa <code>createRoot</code> como en el bloque de arriba. Deja la forma que traiga tu proyecto y solo cambia los imports y el componente.</div>
+      <ol class="pasos" start="8" style="counter-reset:s 7">
+        <li>Ejecuta <code>npm start</code>. En el navegador se ven el título «Películas» y el texto «Película contenido».</li>
+      </ol>
+
+      <p><strong>e) Virtual DOM y Webpack.</strong></p>
+      <ul>
+        <li>Lo que va dentro del <code>return</code> parece HTML, pero es JSX. El <strong>Virtual DOM</strong> lo procesa y genera el HTML final dentro de un archivo JavaScript que el navegador interpreta.</li>
+        <li>Por eso el JSX es <strong>estricto</strong>: toda etiqueta debe cerrarse y los atributos deben escribirse como los reconoce React. Un HTML común perdona una etiqueta sin cerrar; React no.</li>
+        <li><strong>Webpack</strong> compila los componentes y valida que estén bien escritos. Si quitas un <code>&lt;/div&gt;</code> y guardas, la terminal marca el error en rojo con una flecha (<em>JSX incompleto</em> / etiqueta sin cerrar).</li>
+      </ul>
+      <label class="check"><input type="checkbox" data-paso="p15">Paso completado</label>
+    </article>
+
+    <section class="final" id="resumen">
+      <h2>Resumen</h2>
+      <p>Al terminar estos 15 pasos tienes:</p>
+      <ul>
+        <li>VS Code con Prettier (formato al guardar), colores en las llaves y snippets de React.</li>
+        <li>Node.js LTS instalado.</li>
+        <li>El mini proyecto <code>introjs</code> con ejemplos de <code>let</code>, <code>const</code>, scope, backticks, funciones flecha y <code>map</code>.</li>
+        <li>El proyecto React <code>peliculas_spa</code> funcionando, con su primer componente funcional <code>Peliculas</code>.</li>
+      </ul>
+      <p style="margin-bottom:0">El curso continúa con más componentes y hooks sobre este mismo proyecto.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  Documentación elaborada por <strong>María Celeste Guevara</strong> a partir de la transcripción del curso gratuito de JavaScript y React de Mariano Puglisi y Fernando Bursa.<br>
+  Noviembre de 2026
+</footer>
+
+<script>
+(function(){
+  /* tema claro/oscuro */
+  var root=document.documentElement, KEY_T="jsreact-tema";
+  try{var t=localStorage.getItem(KEY_T); if(t) root.setAttribute("data-theme",t);}catch(e){}
+  document.getElementById("tema").addEventListener("click",function(){
+    var oscuro = root.getAttribute("data-theme") ? root.getAttribute("data-theme")==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    var nuevo = oscuro ? "light" : "dark";
+    root.setAttribute("data-theme",nuevo);
+    try{localStorage.setItem(KEY_T,nuevo);}catch(e){}
+  });
+
+  /* menú móvil */
+  var side=document.getElementById("side");
+  document.getElementById("menuBtn").addEventListener("click",function(){side.classList.toggle("abierto");});
+  side.addEventListener("click",function(e){if(e.target.closest("a")) side.classList.remove("abierto");});
+
+  /* resaltado de código */
+  var KW=/^(import|from|export|default|const|let|var|function|return|new)$/;
+  function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+  function resaltar(txt,lang){
+    if(lang==="sh") return esc(txt).replace(/^(\S+)/gm,'<span class="tk-f">$1</span>');
+    var re=/(\/\*[\s\S]*?\*\/|\/\/[^\n]*|<!--[\s\S]*?-->)|("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*'|`(?:[^`\\]|\\.)*`)|(<\/?[A-Za-z][\w.]*|<\/?>|\/?>)|\b(\d+)\b|\b([A-Za-z_$][\w$]*)\b(?=\s*\()|\b([A-Za-z_$][\w$]*)\b/g;
+    var out="",last=0,m;
+    while((m=re.exec(txt))){
+      out+=esc(txt.slice(last,m.index)); last=re.lastIndex;
+      var v=esc(m[0]);
+      if(m[1]) out+='<span class="tk-c">'+v+'</span>';
+      else if(m[2]) out+='<span class="tk-s">'+v+'</span>';
+      else if(m[3]) out+= lang==="js" ? v : '<span class="tk-t">'+v+'</span>';
+      else if(m[4]) out+='<span class="tk-n">'+v+'</span>';
+      else if(m[5]) out+= KW.test(m[5]) ? '<span class="tk-k">'+v+'</span>' : '<span class="tk-f">'+v+'</span>';
+      else if(m[6]) out+= KW.test(m[6]) ? '<span class="tk-k">'+v+'</span>' : v;
+      else out+=v;
+    }
+    return out+esc(txt.slice(last));
+  }
+  document.querySelectorAll(".code").forEach(function(box){
+    var pre=box.querySelector("pre"), cap=box.querySelector(".cap"), txt=pre.textContent;
+    pre.innerHTML=resaltar(txt,pre.dataset.lang||"js");
+    var sp=document.createElement("span"); sp.className="sp"; cap.appendChild(sp);
+    var con=box.querySelector(".consola");
+    if(con){
+      var b2=document.createElement("button"); b2.type="button"; b2.textContent="▶ Ver consola";
+      var html="";
+      if(con.dataset.out) con.dataset.out.split("|").forEach(function(l){html+='<div class="l">'+esc(l)+'</div>';});
+      if(con.dataset.err) html+='<div class="l err">'+esc(con.dataset.err)+'</div>';
+      con.innerHTML=html;
+      b2.addEventListener("click",function(){var v=con.classList.toggle("ver"); b2.textContent=v?"✕ Ocultar consola":"▶ Ver consola";});
+      cap.appendChild(b2);
+    }
+    var b=document.createElement("button"); b.type="button"; b.textContent="Copiar";
+    b.addEventListener("click",function(){
+      var ok=function(){b.textContent="¡Copiado!";setTimeout(function(){b.textContent="Copiar";},1400);};
+      if(navigator.clipboard) navigator.clipboard.writeText(txt).then(ok,function(){});
+      else{var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");ok();}catch(e){}ta.remove();}
+    });
+    cap.appendChild(b);
+  });
+
+  /* progreso */
+  var KEY_P="jsreact-pasos", hechos={};
+  try{hechos=JSON.parse(localStorage.getItem(KEY_P)||"{}")||{};}catch(e){}
+  var checks=document.querySelectorAll(".check input"), total=checks.length;
+  function pintar(){
+    var n=0;
+    checks.forEach(function(c){
+      var id=c.dataset.paso, on=!!hechos[id]; c.checked=on; if(on) n++;
+      document.getElementById(id).classList.toggle("hecho",on);
+      var a=side.querySelector('a[href="#'+id+'"]'); if(a){a.classList.toggle("hecho",on); a.querySelector(".dot").textContent=on?"✓":"";}
+    });
+    document.getElementById("prog").textContent=n+" de "+total+" pasos";
+  }
+  checks.forEach(function(c){c.addEventListener("change",function(){
+    hechos[c.dataset.paso]=c.checked;
+    try{localStorage.setItem(KEY_P,JSON.stringify(hechos));}catch(e){}
+    pintar();
+  });});
+  pintar();
+
+  /* aparición y sección activa */
+  var pasos=document.querySelectorAll(".paso,#resumen");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("vis");io.unobserve(e.target);}});},{rootMargin:"0px 0px -8% 0px"});
+    pasos.forEach(function(p){io.observe(p);});
+  } else pasos.forEach(function(p){p.classList.add("vis");});
+  var links=side.querySelectorAll("a"), bar=document.getElementById("bar");
+  function activo(){
+    var y=window.scrollY+120, actual=null;
+    pasos.forEach(function(p){if(p.offsetTop<=y) actual=p.id;});
+    links.forEach(function(a){a.classList.toggle("on",a.getAttribute("href")==="#"+actual);});
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.width=(h>0?Math.min(100,scrollY/h*100):0)+"%";
+  }
+  addEventListener("scroll",activo,{passive:true}); activo();
+})();
+</script>
+</body>
+</html>
