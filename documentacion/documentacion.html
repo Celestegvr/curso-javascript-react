@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><title>Curso de JavaScript (ES6) y React</title><meta name="author" content="María Celeste Guevara"><style>
+@page{size:A4;margin:20mm 18mm 20mm 18mm}
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Calibri,Arial,sans-serif;color:#1d1f24;font-size:11pt;line-height:1.5;margin:0}
+.portada{height:257mm;display:flex;flex-direction:column;justify-content:space-between;page-break-after:always;padding:10mm 0}
+.portada .banda{height:10mm;background:linear-gradient(90deg,#f0c419,#38bdf8);border-radius:3mm}
+.portada h1{font-size:34pt;line-height:1.1;margin:0 0 6mm;color:#111}
+.portada .sub{font-size:16pt;color:#555;margin:0}
+.portada .curso{font-size:12pt;color:#333;margin-top:10mm}
+.portada .datos{font-size:12pt;border-top:1px solid #ddd;padding-top:6mm}
+.portada .datos div{margin:1.5mm 0}
+.indice{page-break-after:always}
+.indice h1{font-size:20pt;margin:0 0 6mm}
+.indice ul{list-style:none;padding:0;margin:0;columns:1}
+.indice li{padding:1.4mm 0;border-bottom:1px dotted #ccc}
+.indice li.ip{font-weight:700;border:0;margin-top:4mm;color:#0c6e94}
+.indice a{color:#1d1f24;text-decoration:none}
+.parte{page-break-before:always;border-left:5mm solid #f0c419;padding:3mm 0 3mm 6mm;margin-bottom:6mm}
+.parte .kicker{font-size:10pt;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#0c6e94}
+.parte h1{font-size:22pt;margin:1mm 0 2mm}
+.parte p{margin:0;color:#444}
+h2{font-size:15pt;margin:9mm 0 3mm;display:flex;align-items:center;gap:3mm;page-break-after:avoid}
+h2 .num{display:inline-flex;align-items:center;justify-content:center;width:9mm;height:9mm;border-radius:2mm;background:#f0c419;font-size:12pt;flex:none}
+p{margin:2.5mm 0}
+ol,ul{margin:2mm 0 3mm;padding-left:7mm}
+li{margin:1.2mm 0}
+code{font-family:Consolas,"Cascadia Mono",monospace;font-size:9.5pt;background:#f1f2f4;border:1px solid #e1e3e8;border-radius:1mm;padding:0 1mm}
+figure{margin:4mm 0 5mm;page-break-inside:avoid;text-align:center}
+figure img{max-width:100%;max-height:150mm;border:1px solid #d8dbe0;border-radius:1.5mm}
+figcaption{font-size:9.5pt;color:#555;margin-top:1.5mm}
+.nota{border:1px solid;border-left-width:2mm;border-radius:1.5mm;padding:2.5mm 4mm;margin:3mm 0;font-size:10pt;page-break-inside:avoid}
+.nota b{display:block;margin-bottom:.5mm}
+.nota.info{border-color:#38bdf8;background:#f0f9ff}.nota.info b{color:#0c6e94}
+.nota.hoy{border-color:#f59e0b;background:#fffbeb}.nota.hoy b{color:#a35a00}
+.nota.error{border-color:#ef4444;background:#fef2f2}
+.code{border:1px solid #d8dbe0;border-radius:1.5mm;overflow:hidden;margin:3mm 0;page-break-inside:avoid}
+.code .cap{background:#2b2f3a;color:#cfd3dc;font:9pt Consolas,monospace;padding:1.5mm 3mm}
+.code pre{margin:0;background:#1e1e1e;color:#d4d4d4;font:9.5pt/1.45 Consolas,monospace;padding:3mm;white-space:pre-wrap}
+.cierre{margin-top:8mm;border-top:2px solid #f0c419;padding-top:4mm}
+</style></head><body>
+<section class="portada"><div class="banda"></div>
+<div><h1>Curso de JavaScript (ES6) y React</h1><p class="sub">Documentación paso a paso con capturas</p><p class="curso">Curso gratuito de JavaScript y React · Mariano Puglisi y Fernando Bursa</p></div>
+<div class="datos"><div><b>Elaborado por:</b> María Celeste Guevara</div><div><b>Carnet:</b> 2211401</div><div><b>Fecha:</b> 12 de noviembre de 2026</div>
+<div><b>Código:</b> https://github.com/Celestegvr/curso-javascript-react</div><div><b>Sitio publicado:</b> https://curso-javascript-react.vercel.app</div></div></section>
+<section class="indice"><h1>Contenido</h1><ul><li class="ip">Introducción</li><li class="ip">Parte 1 · Instalación de herramientas</li><li><a href="#p1">1. Instalar Visual Studio Code</a></li><li><a href="#p2">2. Tener a mano los atajos de teclado</a></li><li><a href="#p3">3. Instalar las extensiones de VS Code</a></li><li><a href="#p4">4. Configurar Prettier para que formatee al guardar</a></li><li><a href="#p5">5. Instalar Node.js</a></li><li class="ip">Parte 2 · Introducción a JavaScript ECMAScript 6</li><li><a href="#p6">6. Crear el mini proyecto «introjs» y verlo en el navegador</a></li><li><a href="#p7">7. Declarar variables con let y entender el scope</a></li><li><a href="#p8">8. Declarar constantes con const</a></li><li><a href="#p9">9. Concatenar texto con backticks</a></li><li><a href="#p10">10. Escribir funciones flecha (arrow functions)</a></li><li><a href="#p11">11. Recorrer un array con map</a></li><li class="ip">Parte 3 · Primeros pasos con React</li><li><a href="#p12">12. Entender qué es React</a></li><li><a href="#p13">13. Crear el proyecto React</a></li><li><a href="#p14">14. Ejecutar la app y entender cómo funciona</a></li><li><a href="#p15">15. Crear el primer componente: Peliculas</a></li><li class="ip">Publicación · Código en GitHub y Vercel</li><li><a href="#p16">16. Compilar y publicar el código</a></li><li class="ip">Resumen</li></ul></section>
+<section><h1 style="font-size:20pt">Introducción</h1><p>Este documento recoge, paso a paso, lo que se explica en las primeras secciones del curso: la instalación de las herramientas, una introducción a JavaScript ECMAScript 6 y la creación del primer componente en React. Seguí cada clase en mi equipo; las capturas muestran mi código, mi terminal y mi navegador, no el video.</p>
+<p>El código terminado está en GitHub y publicado en Vercel (ver el paso 16):</p>
+<ul><li>Repositorio: <code>https://github.com/Celestegvr/curso-javascript-react</code></li><li>App React: <code>https://curso-javascript-react.vercel.app</code></li><li>Mini proyecto ES6: <code>https://curso-javascript-react.vercel.app/introjs/</code></li></ul>
+<div class="nota info"><b>Sobre las rutas</b>En el video las carpetas se crean en la raíz del disco (<code>C:\introjs</code> y <code>C:\demoreact</code>). Yo las creé dentro de <code>Desktop\IA\curso-javascript-react</code> para tener todo el trabajo en un solo repositorio; los comandos son los mismos.</div></section>
+<section class="parte"><div class="kicker">Parte 1</div><h1>Instalación de herramientas</h1><p>Se prepara el entorno: un editor de código con extensiones útiles y Node.js para trabajar con React.</p></section>
+<h2 id="p1"><span class="num">1</span>Instalar Visual Studio Code</h2>
+<p>VS Code es uno de los editores más usados. Trae <strong>IntelliSense</strong> (autocompletado), herramientas de <strong>depuración</strong> y una <strong>terminal integrada</strong>.</p>
+<ol start="1"><li>Buscar <code>vs code</code> en Google y entrar a la página oficial: <code>code.visualstudio.com</code>.</li><li>Hacer clic en <strong>Download</strong> y elegir el instalador del sistema. En el curso se descarga el de <strong>Windows de 64 bits</strong>.</li><li>Abrir el archivo descargado, <strong>aceptar los términos</strong> y pulsar <strong>Siguiente</strong>.</li><li>Dejar la <strong>ruta de instalación por defecto</strong> y el grupo de programas sugerido.</li><li>En las tareas adicionales marcar <strong>Crear un icono en el escritorio</strong> y <strong>Agregar «Abrir con Code»</strong> al menú contextual del Explorador de Windows.</li><li>Pulsar <strong>Instalar</strong> y, al terminar, <strong>Finalizar</strong>. El editor se abre solo.</li></ol>
+<p>Para comprobar que quedó instalado (junto con Node.js, del paso 5) se pueden pedir las versiones desde la consola:</p>
+<figure><img src="capturas/01-05-versiones.png"><figcaption><b>Figura 1.</b> Versiones instaladas en mi equipo: VS Code, Node.js y npm.</figcaption></figure>
+<h2 id="p2"><span class="num">2</span>Tener a mano los atajos de teclado</h2>
+<p>La clase incluye un PDF con todos los atajos de VS Code (también está en el menú <strong>Help → Keyboard Shortcuts Reference</strong>). Los que se usan en el curso son:</p>
+<ul><li><strong>Ctrl + S</strong>: guardar el archivo (con Prettier configurado, también lo formatea).</li><li><strong>Ctrl + Ñ</strong> (teclado español) o <strong>Ctrl + `</strong> (teclado inglés): abrir la terminal integrada.</li><li><strong>Ctrl + rueda del ratón</strong>: agrandar la letra en la consola de Windows.</li><li><strong>F5</strong> en el navegador: recargar la página. <strong>F12</strong>: abrir las herramientas de desarrollo y la consola.</li></ul>
+<h2 id="p3"><span class="num">3</span>Instalar las extensiones de VS Code</h2>
+<ol start="1"><li>Abrir la vista de <strong>Extensiones</strong>: el icono de los cuadrados en la barra lateral (o <strong>Ctrl + Shift + X</strong>).</li><li>Buscar <code>Prettier</code> e instalar <strong>Prettier - Code formatter</strong>. Ordena la indentación y la estructura del código.</li><li>Buscar <code>Bracket Pair Colorizer</code> e instalar la versión <strong>2</strong>. Colorea cada par de llaves para ver dónde empieza y termina cada función.</li><li>Buscar <code>ES7</code> e instalar <strong>ES7+ React/Redux/React-Native snippets</strong>. Con una abreviatura escribe bloques de código completos (componentes, imports, etc.).</li></ol>
+<p>Las mismas extensiones también se pueden instalar desde la consola con <code>code --install-extension</code>. Así las instalé y luego comprobé la lista:</p>
+<figure><img src="capturas/03-extensiones.png"><figcaption><b>Figura 2.</b> Instalación de las tres extensiones del curso y lista de extensiones de mi VS Code.</figcaption></figure>
+<div class="nota hoy"><b>Nota actual</b>Bracket Pair Colorizer 2 está obsoleta: desde 2021 VS Code colorea los pares de llaves por sí solo (ajuste <code>editor.bracketPairColorization.enabled</code>). Todavía se puede instalar, pero no es necesaria.</div>
+<h2 id="p4"><span class="num">4</span>Configurar Prettier para que formatee al guardar</h2>
+<ol start="1"><li>Ir a <strong>File → Preferences → Settings</strong> (o <strong>Ctrl + ,</strong>).</li><li>Escribir <code>format</code> en el buscador de ajustes.</li><li>En <strong>Editor: Default Formatter</strong> elegir <strong>Prettier - Code formatter</strong>.</li><li>Marcar <strong>Editor: Format On Save</strong>.</li><li>Cerrar los ajustes. Cada vez que se guarda con <strong>Ctrl + S</strong> el archivo se formatea solo.</li></ol>
+<p>Esos dos ajustes quedan escritos en un archivo <code>settings.json</code>. Yo los guardé solo para este proyecto, en <code>.vscode/settings.json</code>, para no cambiar el formato de mis otros proyectos:</p>
+<figure><img src="capturas/04-settings-json.png"><figcaption><b>Figura 3.</b> Ajustes de Prettier en .vscode/settings.json.</figcaption></figure>
+<h2 id="p5"><span class="num">5</span>Instalar Node.js</h2>
+<p>Node.js hace falta para crear el proyecto React e instalar sus módulos con <code>npm</code>.</p>
+<ol start="1"><li>Buscar <code>Node</code> y entrar a la página oficial: <code>nodejs.org</code>.</li><li>Descargar la versión <strong>LTS</strong> (soporte a largo plazo): es la estable y probada. La otra, «Current», trae lo más nuevo, pero se recomienda la LTS.</li><li>Ejecutar el instalador: <strong>Next</strong>, aceptar los términos, dejar la ruta y las opciones por defecto e <strong>Install</strong>.</li><li>Aceptar la ventana de seguridad de Windows y pulsar <strong>Finish</strong>.</li><li>Comprobar en una consola nueva con <code>node -v</code> y <code>npm -v</code> (ver la figura del paso 1).</li></ol>
+<div class="nota hoy"><b>Nota actual</b>En el video se instala Node 14.17.4 LTS. En mi equipo está la versión 24.20.0; lo importante es elegir siempre la que dice LTS.</div>
+<section class="parte"><div class="kicker">Parte 2</div><h1>Introducción a JavaScript ECMAScript 6</h1><p>Un mini proyecto para repasar las novedades de ES6 que después se usan en React. Todos los ejemplos se escriben en <code>script.js</code> y el resultado se ve en la consola del navegador (F12).</p></section>
+<h2 id="p6"><span class="num">6</span>Crear el mini proyecto «introjs» y verlo en el navegador</h2>
+<p><strong>a) Crear la carpeta y los archivos desde la consola.</strong> En la lupa de Windows escribir <code>CMD</code> y pulsar Enter.</p>
+<ol start="1"><li>Ir a la carpeta donde se guardará el proyecto (en el video, <code>cd \</code> lleva a la raíz del disco C:).</li><li><code>mkdir introjs</code> crea la carpeta y <code>cd introjs</code> entra en ella.</li><li><code>copy con index.html</code> crea el archivo. Se termina con <strong>Ctrl + Z</strong> y <strong>Enter</strong>. Repetir con <code>script.js</code>.</li><li><code>code .</code> abre VS Code en esa carpeta. Si pregunta si se confía en los autores, pulsar <strong>Yes</strong>.</li></ol>
+<figure><img src="capturas/06-crear-introjs.png"><figcaption><b>Figura 4.</b> Creación de la carpeta introjs y de sus dos archivos desde la consola.</figcaption></figure>
+<p><strong>b) Escribir la estructura HTML.</strong> En <code>index.html</code> escribir <code>html</code> y elegir el snippet <strong>html:5</strong> (o <code>!</code> y Tab). Cambiar el título a «Intro», agregar un <code>h1</code> y enlazar el script con <code>type="module"</code> (prepara el archivo para <code>import</code> y <code>export</code>). El <code>./</code> indica que <code>script.js</code> está en la misma carpeta.</p>
+<figure><img src="capturas/06-index-html.png"><figcaption><b>Figura 5.</b> index.html del mini proyecto.</figcaption></figure>
+<p><strong>c) Abrirlo con un servidor web.</strong> Un script con <code>type="module"</code> no funciona abriendo el archivo con doble clic. En el curso se usa Internet Information Services (IIS):</p>
+<ol start="5"><li>Buscar <strong>«Activar o desactivar las características de Windows»</strong>, marcar <strong>Internet Information Services</strong> y pulsar <strong>Aceptar</strong>.</li><li>Abrir el <strong>Administrador de IIS</strong> (buscar <code>IIS</code> en la lupa).</li><li>En <strong>Sitios</strong>, clic derecho sobre <strong>Default Web Site</strong> → <strong>Agregar directorio virtual</strong>. Alias: <code>introjs</code>. Ruta física: la carpeta del proyecto.</li><li>Abrir <code>http://localhost/introjs/index.html</code> en Chrome. El nombre del archivo es opcional porque <code>index.html</code> se abre por defecto.</li></ol>
+<div class="nota info"><b>Lo que hice yo</b>No activé IIS en mi equipo. Usé un servidor local equivalente (la extensión Live Server de VS Code o <code>python -m http.server</code> hacen lo mismo), por eso en las capturas la dirección es <code>localhost:5530/introjs/</code>. El resultado es idéntico.</div>
+<h2 id="p7"><span class="num">7</span>Declarar variables con let y entender el scope</h2>
+<p><code>let</code> declara una variable cuyo valor <strong>puede cambiar</strong>. Los nombres se escriben en <strong>camelCase</strong>: la primera palabra en minúscula y la inicial de las siguientes en mayúscula (<code>peliculaTitulo</code>).</p>
+<ol start="1"><li>Crear la función <code>setTitulo</code> con una variable <code>let</code>, mostrarla con <code>console.log</code>, llamar a la función, guardar y recargar con F5.</li></ol>
+<figure><img src="capturas/07-let-codigo.png"><figcaption><b>Figura 6.</b> Primera versión de script.js.</figcaption></figure>
+<figure><img src="capturas/07-let-consola.png"><figcaption><b>Figura 7.</b> La consola muestra «Terminator 2».</figcaption></figure>
+<ol start="2"><li>Probar a declarar otra vez la misma variable dentro de la función. VS Code la subraya y el navegador muestra un error: <strong>una variable let no se puede volver a declarar en el mismo bloque</strong>.</li></ol>
+<figure><img src="capturas/07-let-error-codigo.png"><figcaption><b>Figura 8.</b> VS Code marca la segunda declaración.</figcaption></figure>
+<figure><img src="capturas/07-let-error-consola.png"><figcaption><b>Figura 9.</b> Error en la consola: la variable ya fue declarada.</figcaption></figure>
+<ol start="3"><li>Comentar esa línea y declarar una variable <strong>con el mismo nombre fuera de la función</strong>. Mostrarla después de llamar a la función.</li></ol>
+<figure><img src="capturas/07-scope-codigo.png"><figcaption><b>Figura 10.</b> Variable global y variable local con el mismo nombre.</figcaption></figure>
+<figure><img src="capturas/07-scope-consola.png"><figcaption><b>Figura 11.</b> Se imprimen las dos películas.</figcaption></figure>
+<p>Se ven los dos títulos por el <strong>scope</strong> (alcance) de cada variable: la de afuera es <strong>global</strong> y se puede usar en todo el archivo; la de adentro es <strong>local</strong>, solo existe dentro de <code>setTitulo</code> y ahí tapa a la global.</p>
+<h2 id="p8"><span class="num">8</span>Declarar constantes con const</h2>
+<ol start="1"><li>Crear la función <code>setPrecio</code> con <code>const peliculaPrecio = 50</code>, mostrarla y llamar a la función.</li><li>Probar a asignarle otro valor (<code>peliculaPrecio = 60;</code>). Aparece un error: <strong>a una constante no se le puede cambiar el valor</strong>.</li></ol>
+<figure><img src="capturas/08-const-error-consola.png"><figcaption><b>Figura 12.</b> TypeError: asignación a una variable constante.</figcaption></figure>
+<ol start="3"><li>Comentar esa línea. Declarar una constante global con el mismo nombre (valor 20) y mostrarla al final. El scope funciona igual que con let.</li></ol>
+<figure><img src="capturas/08-const-codigo.png"><figcaption><b>Figura 13.</b> Constante global y constante local.</figcaption></figure>
+<figure><img src="capturas/08-const-consola.png"><figcaption><b>Figura 14.</b> Se imprimen 50 (local) y 20 (global).</figcaption></figure>
+<div class="nota info"><b>¿Cuándo usar const?</b>Para datos que no cambian mientras la aplicación está en uso, por ejemplo el correo del usuario que inició sesión.</div>
+<h2 id="p9"><span class="num">9</span>Concatenar texto con backticks</h2>
+<ol start="1"><li>Crear la función <code>mostrarPrecio</code> y concatenar con <code>+</code>, la forma clásica: <code>"El precio es: " + peliculaPrecio</code>.</li><li>Escribir lo mismo con <strong>backticks</strong>: todo el texto entre <code><code></code> y cada variable dentro de </code>${ }<code>. Ya no hace falta un </code>+` por cada variable.</li></ol>
+<figure><img src="capturas/09-backticks-codigo.png"><figcaption><b>Figura 15.</b> Las dos formas de concatenar.</figcaption></figure>
+<figure><img src="capturas/09-backticks-consola.png"><figcaption><b>Figura 16.</b> Las dos líneas dan el mismo resultado.</figcaption></figure>
+<div class="nota info"><b>¿Dónde está el backtick?</b>En el teclado español suele estar junto a la tecla de los corchetes y llaves. Si no aparece: Alt + 96 en el teclado numérico.</div>
+<h2 id="p10"><span class="num">10</span>Escribir funciones flecha (arrow functions)</h2>
+<ol start="1"><li>Comentar la función anterior con <code>/<em> ... </em>/</code>.</li><li>Declararla como constante: <code>const mostrarPrecio = () =&gt; { ... };</code></li><li>Llamarla como cualquier función y recargar el navegador.</li></ol>
+<figure><img src="capturas/10-arrow-codigo.png"><figcaption><b>Figura 17.</b> mostrarPrecio escrita como función flecha.</figcaption></figure>
+<ul><li>Entre los paréntesis van los <strong>parámetros</strong>. Si hay <strong>uno solo</strong>, se pueden omitir los paréntesis.</li><li>Si el cuerpo es <strong>una sola instrucción</strong>, se pueden omitir las llaves. Con varias instrucciones son obligatorias.</li></ul>
+<h2 id="p11"><span class="num">11</span>Recorrer un array con map</h2>
+<p><code>map</code> está disponible en todos los arrays: recorre cada elemento como un bucle y ejecuta una función por cada uno.</p>
+<ol start="1"><li>Definir el array <code>peliculas</code>: los corchetes crean el array y cada par de llaves es un objeto con <code>idPelicula</code> y <code>titulo</code>. Los números van sin comillas y los textos entre comillas.</li><li>Crear la función flecha <code>mostrarTodas</code>, que recibe el array como parámetro.</li><li>Dentro, llamar a <code>peliculas.map()</code> con una función flecha que recibe cada elemento (<code>p</code>) y lo imprime.</li><li>Llamar a <code>mostrarTodas(peliculas)</code>, guardar y recargar.</li></ol>
+<figure><img src="capturas/11-map-codigo.png"><figcaption><b>Figura 18.</b> Array de películas recorrido con map.</figcaption></figure>
+<figure><img src="capturas/11-final-consola.png"><figcaption><b>Figura 19.</b> Consola con el script.js completo: todos los ejemplos de la Parte 2.</figcaption></figure>
+<div class="nota info"><b>Por qué conviene</b>La función flecha dentro de map no necesita nombre ni declararse aparte: recibe el elemento y lo usa ahí mismo. La estructura se parece a JSON, pero es un objeto de JavaScript.</div>
+<section class="parte"><div class="kicker">Parte 3</div><h1>Primeros pasos con React</h1><p>Se crea el proyecto <code>peliculas_spa</code> (Single Page Application) y su primer componente funcional.</p></section>
+<h2 id="p12"><span class="num">12</span>Entender qué es React</h2>
+<ul><li>Es una <strong>librería de JavaScript para construir interfaces de usuario</strong> (front end), creada por Facebook. Su documentación oficial está en <code>react.dev</code>.</li><li>Usa las novedades de ECMAScript más herramientas propias: <strong>componentes</strong>, <strong>hooks</strong> de estado, de contexto y de referencia, y componentes de terceros. Modificar el DOM a mano con JavaScript es tedioso; React lo simplifica.</li><li>El curso trabaja con <strong>componentes funcionales</strong>.</li></ul>
+<h2 id="p13"><span class="num">13</span>Crear el proyecto React</h2>
+<ol start="1"><li>Abrir <code>CMD</code> y entrar a la carpeta de trabajo (en el video: <code>cd \</code>, <code>mkdir demoreact</code> y <code>cd demoreact</code>).</li><li>Ejecutar <code>npx create-react-app peliculas_spa</code>. Tarda unos minutos (en mi equipo, unos 8).</li><li>Entrar con <code>cd peliculas_spa</code> y abrir el proyecto con <code>code .</code>. Confiar en los autores (<strong>Yes</strong>).</li></ol>
+<figure><img src="capturas/13-create-react-app.png"><figcaption><b>Figura 20.</b> Creación del proyecto peliculas_spa.</figcaption></figure>
+<div class="nota hoy"><b>Nota actual</b>Create React App fue declarado obsoleto en 2025 y lo avisa al empezar (línea amarilla), pero sigue funcionando: instaló React 19 y el proyecto compila bien. Una alternativa actual es Vite: <code>npm create vite@latest</code>.</div>
+<h2 id="p14"><span class="num">14</span>Ejecutar la app y entender cómo funciona</h2>
+<ol start="1"><li>Abrir la terminal de VS Code (<strong>Ctrl + Ñ</strong>) y ejecutar <code>npm start</code>. Se abre el navegador en <code>http://localhost:3000</code>.</li></ol>
+<figure><img src="capturas/14-npm-start.png"><figcaption><b>Figura 21.</b> El servidor de desarrollo compila sin errores.</figcaption></figure>
+<figure><img src="capturas/14-react-inicio.png"><figcaption><b>Figura 22.</b> Página inicial estándar de un proyecto React.</figcaption></figure>
+<p>El recorrido que hace la aplicación para mostrar esa página:</p>
+<ol start="2"><li><code>public/index.html</code> tiene un <code>div</code> vacío con <code>id="root"</code>.</li><li><code>src/index.js</code> importa los componentes y los dibuja dentro de <code>root</code> con <code>render</code>. <code>React.StrictMode</code> viene por defecto y activa el modo estricto.</li><li><code>src/App.js</code> es el componente que retorna el HTML de la página: el logo, el texto y el enlace. Para usarlo se escribe como etiqueta: <code>&lt;App /&gt;</code>, y al importarlo no hace falta la extensión <code>.js</code>.</li></ol>
+<figure><img src="capturas/14-public-index-html.png"><figcaption><b>Figura 23.</b> El div root en public/index.html.</figcaption></figure>
+<figure><img src="capturas/14-index-js-original.png"><figcaption><b>Figura 24.</b> src/index.js tal como lo crea create-react-app.</figcaption></figure>
+<figure><img src="capturas/14-app-js.png"><figcaption><b>Figura 25.</b> src/App.js: el componente de la página inicial.</figcaption></figure>
+<div class="nota hoy"><b>Diferencia con el video</b>En el video <code>index.js</code> usa la forma de React 17: <code>ReactDOM.render(&lt;App /&gt;, document.getElementById("root"))</code>. Mi proyecto trae React 19, que usa <code>ReactDOM.createRoot(...)</code> y <code>root.render(...)</code>. La idea es la misma.</div>
+<ol start="5"><li>Quitar el logo en <code>App.js</code> y guardar: el navegador se actualiza solo, sin F5. Después dejar el archivo como estaba.</li></ol>
+<figure><img src="capturas/14-react-sin-logo.png"><figcaption><b>Figura 26.</b> Al guardar App.js sin el logo, la página se actualiza sola.</figcaption></figure>
+<p>Todo lo que se escribe en React termina convertido en JavaScript, el lenguaje que entienden todos los navegadores.</p>
+<h2 id="p15"><span class="num">15</span>Crear el primer componente: Peliculas</h2>
+<p><strong>a) Limpiar el proyecto.</strong> En <code>src</code> borrar <code>App.css</code>, <code>App.js</code>, <code>App.test.js</code>, <code>index.css</code>, <code>logo.svg</code>, <code>reportWebVitals.js</code> y <code>setupTests.js</code>. En <code>index.js</code> borrar sus <code>import</code>, el componente <code>&lt;App /&gt;</code> y la llamada a <code>reportWebVitals</code>.</p>
+<p><strong>b) Crear el componente.</strong> Clic derecho en <code>src</code> → <strong>New Folder</strong> → <code>components</code>; dentro, la carpeta <code>Pelicula</code> y el archivo <code>Peliculas.jsx</code> (las extensiones .js y .jsx son válidas; .jsx ayuda al editor a reconocer el componente).</p>
+<figure><img src="capturas/15-peliculas-v1.png"><figcaption><b>Figura 27.</b> Primer componente funcional y estructura del proyecto tras la limpieza.</figcaption></figure>
+<ul><li><strong>Imports arriba</strong>: todo componente importa React con <code>import React from "react";</code>.</li><li><strong>Definición</strong>: una función flecha cuyo nombre empieza con <strong>mayúscula</strong>, para que React la reconozca como componente. Es un <em>componente funcional</em>; los de clase existen, pero el curso no los usa.</li><li><strong>return</strong>: devuelve el HTML (JSX) que el componente insertará donde se use.</li><li><strong>export default</strong>: sin exportarlo, ningún otro archivo puede importarlo.</li></ul>
+<p><strong>c) Mostrarlo en index.js.</strong> Importarlo con la ruta relativa, sin extensión, y escribirlo como etiqueta con la P mayúscula, igual que se exportó:</p>
+<figure><img src="capturas/15-index-js-final.png"><figcaption><b>Figura 28.</b> index.js final: importa y muestra Peliculas.</figcaption></figure>
+<figure><img src="capturas/15-react-peliculas-v1.png"><figcaption><b>Figura 29.</b> El navegador muestra el componente.</figcaption></figure>
+<p><strong>d) Un único elemento padre.</strong> Si se agrega un segundo <code>div</code> al mismo nivel, aparece un error en VS Code y en el navegador:</p>
+<figure><img src="capturas/15-error-padre-codigo.png"><figcaption><b>Figura 30.</b> VS Code marca el segundo div.</figcaption></figure>
+<figure><img src="capturas/15-error-padre-navegador.png"><figcaption><b>Figura 31.</b> Error de compilación: los elementos JSX deben estar dentro de una sola etiqueta.</figcaption></figure>
+<p>Se soluciona envolviendo todo en un <strong>Fragment</strong>, una etiqueta vacía <code>&lt;&gt; &lt;/&gt;</code>:</p>
+<figure><img src="capturas/15-fragment-codigo.png"><figcaption><b>Figura 32.</b> Peliculas.jsx con Fragment.</figcaption></figure>
+<figure><img src="capturas/15-react-final.png"><figcaption><b>Figura 33.</b> Resultado final del componente.</figcaption></figure>
+<p><strong>e) Virtual DOM y Webpack.</strong> Lo que va dentro del <code>return</code> parece HTML, pero es JSX. El <strong>Virtual DOM</strong> lo procesa y genera el HTML final dentro de un archivo JavaScript. Por eso el JSX es <strong>estricto</strong>: toda etiqueta debe cerrarse. <strong>Webpack</strong> compila los componentes y avisa si algo está mal; por ejemplo, al quitar el cierre de un <code>div</code>:</p>
+<figure><img src="capturas/15-error-sin-cerrar-navegador.png"><figcaption><b>Figura 34.</b> Error de compilación por una etiqueta sin cerrar (JSX incompleto).</figcaption></figure>
+<section class="parte"><div class="kicker">Publicación</div><h1>Código en GitHub y Vercel</h1><p>El código de los dos proyectos se subió a GitHub y se publicó en Vercel.</p></section>
+<h2 id="p16"><span class="num">16</span>Compilar y publicar el código</h2>
+<ol start="1"><li>Comprobar que la app compila para producción con <code>npm run build</code>.</li><li>Subir la carpeta del curso a GitHub: <code>https://github.com/Celestegvr/curso-javascript-react</code>.</li><li>En Vercel, <strong>Add New → Project</strong>, importar el repositorio y pulsar <strong>Deploy</strong>. El archivo <code>vercel.json</code> le indica cómo compilar <code>peliculas_spa</code> y copia <code>introjs</code> dentro del sitio.</li><li>Cada vez que se sube un cambio a la rama <code>main</code>, Vercel vuelve a publicar el sitio.</li></ol>
+<figure><img src="capturas/16-npm-run-build.png"><figcaption><b>Figura 35.</b> Compilación de producción sin errores.</figcaption></figure>
+<div class="code"><div class="cap">vercel.json</div><pre>{
+  &quot;installCommand&quot;: &quot;cd peliculas_spa &amp;&amp; npm install&quot;,
+  &quot;buildCommand&quot;: &quot;cd peliculas_spa &amp;&amp; npm run build &amp;&amp; cp -r ../introjs build/introjs&quot;,
+  &quot;outputDirectory&quot;: &quot;peliculas_spa/build&quot;
+}</pre></div>
+<figure><img src="capturas/16-vercel-react.png"><figcaption><b>Figura 36.</b> App React publicada en https://curso-javascript-react.vercel.app</figcaption></figure>
+<figure><img src="capturas/16-vercel-introjs.png"><figcaption><b>Figura 37.</b> Mini proyecto publicado en https://curso-javascript-react.vercel.app/introjs/</figcaption></figure>
+<section class="cierre"><h2>Resumen</h2><p>Al terminar estos pasos quedaron:</p>
+<ul><li>VS Code con Prettier (formato al guardar), Bracket Pair Colorizer 2 y los snippets de React; Node.js LTS instalado.</li><li>El mini proyecto <code>introjs</code> con ejemplos de let, const, scope, backticks, funciones flecha y map.</li><li>El proyecto React <code>peliculas_spa</code> con su primer componente funcional, <code>Peliculas</code>.</li><li>Todo el código en GitHub (https://github.com/Celestegvr/curso-javascript-react) y publicado en Vercel (https://curso-javascript-react.vercel.app).</li></ul></section>
+</body></html>
