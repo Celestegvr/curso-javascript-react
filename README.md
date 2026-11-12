@@ -1,13 +1,27 @@
-# Curso de JavaScript (ES6) y React · Paso a paso
+# Curso de JavaScript (ES6) y React
 
-Documentación paso a paso, en una sola página web, del curso gratuito de JavaScript y React de Mariano Puglisi y Fernando Bursa. Está escrita a partir de la transcripción de las clases.
+Código que hice siguiendo el curso gratuito de JavaScript y React de Mariano Puglisi y Fernando Bursa.
 
-Contenido:
+| Carpeta | Contenido |
+| --- | --- |
+| `introjs/` | Mini proyecto de introducción a ECMAScript 6: `let`, `const`, scope, backticks, funciones flecha y `map`. Los resultados se ven en la consola del navegador (F12). |
+| `peliculas_spa/` | Proyecto React creado con `npx create-react-app`, con el primer componente funcional `Peliculas` en `src/components/Pelicula/Peliculas.jsx`. |
+| `documentacion/` | Capturas de pantalla y registros usados en el documento paso a paso. |
+| `.vscode/settings.json` | Prettier como formateador por defecto y formato al guardar. |
 
-1. Instalación de herramientas: Visual Studio Code, extensiones, Prettier y Node.js.
-2. Introducción a ECMAScript 6: `let`, `const`, scope, backticks, funciones flecha y `map`.
-3. Primeros pasos con React: crear el proyecto, cómo funciona y el primer componente funcional.
+## Publicado en Vercel
 
-Es un sitio estático (`index.html`), sin dependencias ni compilación. Se publica en Vercel con el preset **Other**.
+- App React: https://curso-javascript-react.vercel.app/
+- Mini proyecto ES6: https://curso-javascript-react.vercel.app/introjs/
+
+`vercel.json` instala y compila `peliculas_spa` y copia `introjs` dentro de la carpeta `build`.
+
+## Ejecutar en local
+
+```bash
+cd peliculas_spa
+npm install
+npm start
+```
 
 Autora: **María Celeste Guevara**

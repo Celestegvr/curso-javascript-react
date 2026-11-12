@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd peliculas_spa && npm install",
+  "buildCommand": "cd peliculas_spa && npm run build && cp -r ../introjs build/introjs",
+  "outputDirectory": "peliculas_spa/build"
+}
