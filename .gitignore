@@ -1,2 +1,3 @@
 documentacion/tmp/
 *.log.tmp
+__pycache__/
